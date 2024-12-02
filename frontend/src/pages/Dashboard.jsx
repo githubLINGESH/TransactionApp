@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const navigate = useNavigate()
   const [balance, setBalance] = useState("");
   const [transferState, setTransferState] = useState(false)
@@ -16,7 +17,7 @@ const Dashboard = () => {
     try{
       const response = await axios({
         method:'get',
-        url:'http://192.168.230.221:3000/api/v1/user/me',
+        url:`${url}/api/v1/user/me`, //http://192.168.230.221:3000
         headers:{
           'Authorization':'Bearer '+localStorage.getItem('token')
         }
@@ -29,11 +30,10 @@ const Dashboard = () => {
   }
 
   const userdata = async () => {
-   
     try {
       const response = await axios({
         method: "get",
-        url: "http://192.168.230.221:3000/api/v1/user/getUserDetails",
+        url: `${url}/api/v1/user/getUserDetails`,
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -52,7 +52,7 @@ const Dashboard = () => {
       const value  = search ? search : ""
      const response = await axios({
         method:"get",
-        url:"http://192.168.230.221:3000/api/v1/user/bulk",
+        url:`${url}/api/v1/user/bulk`,
         headers:{
           'Authorization':"Bearer " + localStorage.getItem("token")
         },
@@ -81,7 +81,7 @@ const Dashboard = () => {
       try {
         const response = await axios({
           method: "get",
-          url: "http://192.168.230.221:3000/api/v1/account/balance",
+          url: `${url}/api/v1/account/balance`,
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },

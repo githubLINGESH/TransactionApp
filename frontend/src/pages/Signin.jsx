@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const navigate = useNavigate()
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -26,7 +27,7 @@ const Signin = () => {
              try{
               const response = await axios({
                 method:"post",
-                url:'http://192.168.230.221:3000/api/v1/user/signin',
+                url:`${url}/api/v1/user/signin`,
                 data:{
               username:email,
               password
