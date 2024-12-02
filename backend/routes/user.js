@@ -3,7 +3,7 @@ const userRouter = express.Router();
 const z = require("zod");
 const jwt = require("jsonwebtoken");
 const jwtpassword = require("../config");
-const {User,Account} = require("../../database/db");
+const {User,Account} = require("../database/db");
 const authenticationMiddleware = require("../Middleware/middleware");
 
 userRouter.get('/getUserDetails',authenticationMiddleware,async (req,res)=>{

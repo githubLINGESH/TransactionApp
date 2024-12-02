@@ -23,8 +23,8 @@ const Dashboard = () => {
       })  
   }
     catch(e){
-      console.log(e.response.data.message)
       navigate('/signup')
+      console.log(e.response.data.message)
     } 
   }
 
