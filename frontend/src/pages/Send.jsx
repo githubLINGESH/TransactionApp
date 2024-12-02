@@ -5,6 +5,7 @@ import ButtonComponent from '../Components/ButtonComponent'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios'
 const Send = () => {
+  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const [searchParams, setSearchParams] = useSearchParams();
   const firstname = searchParams.get('firstname')
   const lastname = searchParams.get('lastname')
@@ -18,7 +19,7 @@ const Send = () => {
     try{
     const response = await axios({
       method:'post',
-      url:"http://192.168.230.221:3000/api/v1/account/transfer",
+      url:`${url}/api/v1/account/transfer`,
       data:{
         amount,
         to:id

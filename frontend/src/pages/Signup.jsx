@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
+    const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
     const navigate = useNavigate()
     const [firstname,setFirstname] = useState('')
     const [lastname,setLastname] = useState('')
@@ -33,7 +34,7 @@ const Signup = () => {
                         try{
                             const response = await axios({
                                 method:'post',
-                                url:'http://192.168.230.221:3000/api/v1/user/signup/',
+                                url:`${url}/api/v1/user/signup/`,
                                 data:{
                                     firstname,
                                     lastname,
