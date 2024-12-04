@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {OrbitProgress} from "react-loading-indicators"
 
 const Dashboard = () => {
-  const url = import.meta.env.VITE_REACT_DEV_URL;
+  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const navigate = useNavigate()
   const [balance, setBalance] = useState("");
   const [transferState, setTransferState] = useState(false)

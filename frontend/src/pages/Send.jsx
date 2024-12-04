@@ -5,7 +5,7 @@ import ButtonComponent from '../Components/ButtonComponent'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios'
 const Send = () => {
-  const url = import.meta.env.VITE_REACT_DEV_URL;
+  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const [searchParams, setSearchParams] = useSearchParams();
   const firstname = searchParams.get('firstname')
   const lastname = searchParams.get('lastname')
