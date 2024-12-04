@@ -38,7 +38,7 @@ const Signin = () => {
             navigate('/')
           }
             catch(e){
-              navigate('signin')
+              navigate('/signin')
               alert(e.response.data.message)
               console.log(e.response.data)
             }

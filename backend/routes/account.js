@@ -3,6 +3,7 @@ const authenticationMiddleware = require('../Middleware/middleware');
 const { Account } = require('../database/db');
 const mongoose = require('mongoose');
 const accountRouter = express.Router();
+const zod = require("zod")
 
 accountRouter.get('/balance',authenticationMiddleware,async (req,res)=>{
     const userId = req.body.userId
@@ -13,14 +14,20 @@ accountRouter.get('/balance',authenticationMiddleware,async (req,res)=>{
 })
 
 accountRouter.post('/transfer',authenticationMiddleware,async (req,res)=>{
-    
+    const amountSchema = zod.number().min(1)    
     let {amount, to} = req.body
+    const parseResult = amountSchema.safeParse(parseResult)
+    if(!parseResult.success){
+        return res.json({
+            message:"Enter Valid Number"
+        })
+    }
     amount = parseInt(amount)
     const userId = req.body.userId
     const fromAccount = await Account.findOne({userId})
     if(!fromAccount || fromAccount.balance<amount){
         return res.json({
-            message:"Insuuficient Balance"
+            message:"Insufficient Balance"
         })
     }
     const toAccount = await Account.findOne({
