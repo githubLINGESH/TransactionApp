@@ -4,15 +4,18 @@ import BalanceComponent from "../Components/BalanceComponent";
 import UsersComponent from "../Components/UsersComponent";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {OrbitProgress} from "react-loading-indicators"
 
 const Dashboard = () => {
-  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+  const url = import.meta.env.VITE_REACT_DEV_URL;
   const navigate = useNavigate()
   const [balance, setBalance] = useState("");
   const [transferState, setTransferState] = useState(false)
   const [users,setUsers] = useState([])
   const [search,setSearch] = useState('')
   const [fname,setFname] = useState('')
+  const [loading,setLoading] = useState(true)
+
   const auth = async () => {
     
     try{
@@ -62,7 +65,7 @@ const Dashboard = () => {
         }
       })
       setUsers(response.data.users)
-
+      setLoading(false)
     }
     catch(e){
       console.log("In catch block "+response.data.message)
@@ -97,10 +100,17 @@ const Dashboard = () => {
 
 
   return (
-    <div>
-      <AppBar firstname={fname} />
+    <div>{
+      loading?
+      <div className="flex items-center justify-center bg-gray-300 h-screen">
+      <OrbitProgress dense color="#5231cc" size="medium" text="" textColor="" />
+      </div>:
+      <>
+        <AppBar firstname={fname} />
       <BalanceComponent balance={balance} />
       <UsersComponent users={users} setSearch = {setSearch}/>
+      </>
+    }
     </div>
   );
 };

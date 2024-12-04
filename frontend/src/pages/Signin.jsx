@@ -6,9 +6,11 @@ import ButtonComponent from '../Components/ButtonComponent'
 import BottomWarningComponent from '../Components/BottomWarningComponent'
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const Signin = () => {
-  const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+  const url = import.meta.env.VITE_REACT_DEV_URL;
+  let buttonRef = useRef(null);
   const navigate = useNavigate()
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -22,10 +24,10 @@ const Signin = () => {
           />
           <InputComponent onChange={(e)=>{setEmail(e.target.value)}} labelInput={"Email"} placeHolderInput={"sharaan@gmail.com"}/>
           <InputComponent onChange={(e)=>{setPassword(e.target.value)}} labelInput={"Password"} placeHolderInput={"*******  "}/>
-          <ButtonComponent title="Sign in" onClick={
+          <ButtonComponent title="Sign in"buttonRef = {buttonRef}  onClick={
             
             async ()=>{
-              navigate('/loading')
+              buttonRef.current.innerHTML = "LOADING"
              try{
               const response = await axios({
                 method:"post",
@@ -38,7 +40,7 @@ const Signin = () => {
             navigate('/')
           }
             catch(e){
-              navigate('/signin')
+              buttonRef.current.innerHTML = "Sign in"
               alert(e.response.data.message)
               console.log(e.response.data)
             }

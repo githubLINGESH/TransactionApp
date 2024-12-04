@@ -6,9 +6,11 @@ import ButtonComponent from '../Components/ButtonComponent'
 import BottomWarningComponent from '../Components/BottomWarningComponent'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useRef } from "react";
 
 const Signup = () => {
-    const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+    const url = import.meta.env.VITE_REACT_DEV_URL;
+    let buttonRef = useRef(null);
     const navigate = useNavigate()
     const [firstname,setFirstname] = useState('')
     const [lastname,setLastname] = useState('')
@@ -30,9 +32,8 @@ const Signup = () => {
                     <InputComponent labelInput={"Password"} placeHolderInput={"*******"} onChange={(e)=>{setPassword(e.target.value)}} />
                 </div>
                 <div>
-                    <ButtonComponent title={"Sign up"} onClick={async ()=>{
-                        navigate('/loading')
-                        console.log(url)
+                    <ButtonComponent title={"Sign up"} buttonRef = {buttonRef} onClick={async ()=>{
+                        buttonRef.current.innerHTML = "LOADING"
                         try{
                             const response = await axios({
                                 method:'post',
@@ -48,13 +49,13 @@ const Signup = () => {
                             navigate('/')
                         }  
                             catch(e){
-                                navigate('/signup')
+                                buttonRef.current.textContent = "Sign up"
                                 alert(e.response.data.message)
                             }
                         }
                     }
                     />
-                    <BottomWarningComponent title1={"Already have an account?"} title2={"Sign in"} to={"/signin"}/>
+                    <BottomWarningComponent  title1={"Already have an account?"} title2={"Sign in"} to={"/signin"}/>
                 </div>
             </div>
         </div>
