@@ -14,6 +14,7 @@ accountRouter.get('/balance',authenticationMiddleware,async (req,res)=>{
 })
 
 accountRouter.post('/transfer',authenticationMiddleware,async (req,res)=>{
+    console.log("Hi 1")
     const amountSchema = zod.number().min(1)    
     let {amount, to} = req.body
     const parseResult = amountSchema.safeParse(parseResult)
