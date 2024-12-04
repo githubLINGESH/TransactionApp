@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [search,setSearch] = useState('')
   const [fname,setFname] = useState('')
   const auth = async () => {
+    
     try{
       const response = await axios({
         method:'get',

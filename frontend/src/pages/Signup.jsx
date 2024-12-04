@@ -31,6 +31,7 @@ const Signup = () => {
                 </div>
                 <div>
                     <ButtonComponent title={"Sign up"} onClick={async ()=>{
+                        navigate('/loading')
                         try{
                             const response = await axios({
                                 method:'post',
@@ -46,6 +47,7 @@ const Signup = () => {
                             navigate('/')
                         }  
                             catch(e){
+                                navigate('/signup')
                                 alert(e.response.data.message)
                             }
                         }

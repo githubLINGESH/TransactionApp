@@ -23,7 +23,9 @@ const Signin = () => {
           <InputComponent onChange={(e)=>{setEmail(e.target.value)}} labelInput={"Email"} placeHolderInput={"sharaan@gmail.com"}/>
           <InputComponent onChange={(e)=>{setPassword(e.target.value)}} labelInput={"Password"} placeHolderInput={"*******  "}/>
           <ButtonComponent title="Sign in" onClick={
+            
             async ()=>{
+              navigate('/loading')
              try{
               const response = await axios({
                 method:"post",
@@ -36,6 +38,7 @@ const Signin = () => {
             navigate('/')
           }
             catch(e){
+              navigate('signin')
               alert(e.response.data.message)
               console.log(e.response.data)
             }
