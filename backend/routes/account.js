@@ -17,7 +17,7 @@ accountRouter.post('/transfer',authenticationMiddleware,async (req,res)=>{
     console.log("Hi 1")
     const amountSchema = zod.number().min(1)    
     let {amount, to} = req.body
-    const parseResult = amountSchema.safeParse(parseResult)
+    const parseResult = amountSchema.safeParse(amountSchema)
     if(!parseResult.success){
         return res.json({
             message:"Enter Valid Number"
