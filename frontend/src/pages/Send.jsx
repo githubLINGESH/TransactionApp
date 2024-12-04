@@ -15,6 +15,7 @@ const Send = () => {
   const [amount,setAmount] = useState('')
 
   async function transferAmount(){
+    console.log(`${url}/api/v1/account/transfer`)
     navigate('/loading')
     let status =''
     try{

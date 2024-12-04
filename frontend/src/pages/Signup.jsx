@@ -32,6 +32,7 @@ const Signup = () => {
                 <div>
                     <ButtonComponent title={"Sign up"} onClick={async ()=>{
                         navigate('/loading')
+                        console.log(url)
                         try{
                             const response = await axios({
                                 method:'post',

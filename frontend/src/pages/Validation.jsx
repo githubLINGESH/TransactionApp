@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 const Validation = () => {
   const url = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+
     const navigate = useNavigate()
     navigate('/loading')
      async function validate(){

@@ -1,7 +1,6 @@
 const express = require('express');
 const authenticationMiddleware = require('../Middleware/middleware');
 const { Account } = require('../database/db');
-const mongoose = require('mongoose');
 const accountRouter = express.Router();
 const zod = require("zod")
 
@@ -15,9 +14,16 @@ accountRouter.get('/balance',authenticationMiddleware,async (req,res)=>{
 
 accountRouter.post('/transfer',authenticationMiddleware,async (req,res)=>{
     
-    const amountSchema = zod.number().min(1)    
+    const schema = zod
+    .string() // Validate as string first to check for non-numeric inputs
+    .regex(/^\d+$/, "Value must only contain numeric digits") // Ensure only numbers
+    .transform(Number) // Convert string to number
+    .refine((val) => val > 0 && val <= 50000, {
+        message: "Value must be greater than 0 and less than or equal to 50,000",
+  }); 
     let {amount, to} = req.body
-    const parseResult = amount.safeParse(amountSchema)
+    const parseResult = schema.safeParse(amount)
+    console.log(parseResult)
     if(!parseResult.success){
         return res.json({
             message:"Enter Valid Number"
