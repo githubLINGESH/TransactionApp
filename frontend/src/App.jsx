@@ -4,6 +4,7 @@
  import Signin from "./pages/Signin"
  import Signup from "./pages/Signup"  
  import Validation from "./pages/Validation" 
+ import LoadingIcon from './pages/LoadingIcon'
  import './index.css'
 import { useEffect, useState } from "react"
 import TransferStatus from "./pages/TransferStatus"
@@ -12,6 +13,8 @@ function App() {
     <>
      
       <Routes>
+        
+        <Route path="/loading" element={<LoadingIcon/>}/>
         <Route path="/status" element={<TransferStatus/>}> </Route>
         <Route path="/dashboard" element={<Dashboard/>}> </Route>
         <Route path="/" element={<Validation/>}></Route>

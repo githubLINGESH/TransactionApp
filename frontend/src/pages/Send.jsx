@@ -15,6 +15,7 @@ const Send = () => {
   const [amount,setAmount] = useState('')
 
   async function transferAmount(){
+    navigate('/loading')
     let status =''
     try{
     const response = await axios({

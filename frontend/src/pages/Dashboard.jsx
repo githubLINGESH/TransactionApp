@@ -24,7 +24,7 @@ const Dashboard = () => {
       })  
   }
     catch(e){
-      navigate('/signup')
+      navigate('/signup') 
       console.log(e.response.data.message)
     } 
   }
